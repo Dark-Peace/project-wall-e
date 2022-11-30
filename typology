@@ -1,8 +1,23 @@
 typologie :
-1 noeud xxx dégénéré
+
+pour a = -0.15 et b = 0.9
+1 noeud instable dégénéré
 2 selle
 3 centre
-4 noeud xxx dégénéré
+4 noeud instable dégénéré
 
-1 et 4 manquent stable/instable...
+pour a et b = 0.1
+1 noeud instable dégénéré
+2 ligne équilibre instable
+3 noeud stable dégénéré
+4 noeud instable dégénéré
+
+pour a et b = -0.1
+1 noeud stable dégénéré
+2 ligne équilibre stable
+3 noeud instable dégénéré
+4 noeud stable dégénéré
+
+
+j'ai du mal à différencier noeud instable dégénéré de stable dégénéré alors je suis pas sûr...
 voir TP3 page 12 pour la théorie
