@@ -57,7 +57,7 @@ tspan = [tstart tfinal];
 [t2,y2] = ode23(@(t,y) love_2(t,y,a,b),tspan,y0);
 [t3,y3] = ode23(@(t,y) love_3(t,y,a,b),tspan,y0);
 [t4,y4] = ode23(@(t,y) love_4(t,y,a,b),tspan,y0);
-[t5,y5] = ode23(@(t,y) love_5(t,y,max(0,100-0.1*t),b),tspan,y0);
+%[t5,y5] = ode23(@(t,y) love_5(t,y,max(0,100-0.1*t),b),tspan,y0);
 
 % display graph
 
@@ -95,12 +95,12 @@ YLabel.String = 'Emotions';
 Title.String = 'WallE & Eve''s relationship';
 %legend('WallE','Eve')
 % 5
-ax5 = subplot(3,2,5);
-plot(ax5,t5,y5')
-YLim = [-1.5 1.5];
-XLabel.String = 'Time';
-YLabel.String = 'Emotions';
-Title.String = 'WallE & Eve''s relationship';
+##ax5 = subplot(3,2,5);
+##plot(ax5,t5,y5')
+##YLim = [-1.5 1.5];
+##XLabel.String = 'Time';
+##YLabel.String = 'Emotions';
+##Title.String = 'WallE & Eve''s relationship';
 %legend('WallE','Eve')
 
 
@@ -120,10 +120,6 @@ x41 = zeros(size(uu));
 x42 = zeros(size(vv));
 x51 = zeros(size(uu));
 x52 = zeros(size(vv));
-
-%a = -2e-1;
-%b = 5e-1;
-%love_1 = @(t,y) [a*y(2); b*y(1)];
 
 
 % calculate data for portrait phases
@@ -153,10 +149,10 @@ end
 
 % display portrait
 figure 2
-gca1 = subplot(3,2,1)
-gca2 = subplot(3,2,2)
-gca3 = subplot(3,2,3)
-gca4 = subplot(3,2,4)
+gca1 = subplot(2,2,1)
+gca2 = subplot(2,2,2)
+gca3 = subplot(2,2,3)
+gca4 = subplot(2,2,4)
 %gca5 = subplot(3,2,5)
 
 %1
@@ -169,11 +165,39 @@ quiver(gca2,uu,vv,x21,x22,'r');
 xlabel('Eve Emotions');
 ylabel('WallE Emotions');
 axis tight equal;
+
+##hold on;
+##
+##function [isocline_1,isocline_2] = compute_isoclines(A,line_range)
+##    isocline_1 = -(-0.15/0.9) * line_range;
+##    isocline_2 = -(0.9/-0.15) * line_range;
+##endfunction
+##
+##x1range = -10:.1:10;
+##[isocline_1,isocline_2] = compute_isoclines(A,x1range);
+##plot(x1range,isocline_1,"linewidth",1);
+##plot(x1range,isocline_2,"linewidth",1);
+
 %3
 quiver(gca3,uu,vv,x31,x32,'r');
 xlabel('Eve Emotions');
 ylabel('WallE Emotions');
 axis tight equal;
+
+##hold on;
+##
+##function [isocline_1,isocline_2] = compute_isoclines(A,line_range)
+##    isocline_1 = -(-0.15/0.9) * line_range;
+##    isocline_2 = -(-0.9/0.15) * line_range;
+##endfunction
+##
+##A = [-5 -3; 1 -1];
+##x1range = -10:.1:10;
+##[isocline_1,isocline_2] = compute_isoclines(A,x1range);
+##plot(x1range,isocline_1,"linewidth",1);
+##plot(x1range,isocline_2,"linewidth",1);
+##hold off;
+
 %4
 quiver(gca4,uu,vv,x41,x42,'r');
 xlabel('Eve Emotions');
@@ -186,7 +210,15 @@ axis tight equal;
 %axis tight equal;
 
 
-
+##figure 3
+##giso = subplot(2,2,1)
+##f = uu.^2-vv.^2;
+##contour(uu,vv,f);
+##hold on;
+##dx = ones(size(uu));
+##quiver(uu,vv,dx,f);
+##axis tight;
+##hold off;
 
 
 %y0_1 = [2;-1]; % initial conditions
