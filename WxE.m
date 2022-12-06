@@ -53,40 +53,6 @@ function [line_range,eigenline_1,eigenline_2] = plot_eigenlines(A)
     [eigenline_1,eigenline_2,V] = compute_eigenlines(A,line_range);
 endfunction
 
-##[line_range,isocline_1,isocline_2] = plot_isoclines(A);
-##[line_range,eigenline_1,eigenline_2] = plot_eigenlines(A);
-figure 2
-##plot(line_range,isocline_1,"linewidth",1);
-##hold on;
-##plot(line_range,isocline_2,"linewidth",1);
-##hold on;
-##plot(line_range,eigenline_1,"linewidth",1);
-##hold on;
-##plot(line_range,eigenline_2,"linewidth",1);
-##hold on;
-#quiver([0;0],[0;0],V(1,:),V(2,:),1.5,"linewidth",1,"color","k");
-#legend("isocline_1","isocline_2","v_1","v_2","location","south");
-
-# 4. Portrait de phase
-function [x1,x2,x1p,x2p] = plot_portrait_phase(A)
-    #grid for plotting
-    x1range=-1.5:.1:1.5;
-    x2range=-1.5:.1:1.5;
-    [x1,x2] = meshgrid(x1range, x2range);
-
-    # Define the system to plot (based on matrix A)
-    x1p = A(1,1)*x1+A(1,2)*x2;
-    x2p = A(2,1)*x1+A(2,2)*x2;
-
-    #Normalize values for plotting
-    norms=sqrt(x1p.^2+x2p.^2);
-    # Vector field plot
-    hold on;
-    quiver(x1,x2,x1p./norms,x2p./norms,0.5);
-endfunction
-
-#[x1,x2,x1p,x2p] = plot_portrait_phase(A);
-
 # 4. Portrait de phase complet
 function [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A)
     #grid for plotting
@@ -108,20 +74,17 @@ function [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A)
     hold on;
     quiver(x1,x2,x1p./norms,x2p./norms,0.5);
     # Isoclines
-    plot(x1range,isocline_1,"linewidth",1);
-    plot(x1range,isocline_2,"linewidth",1);
+    plot(x1range,isocline_1,"linewidth",1,'LineStyle','--');
+    plot(x1range,isocline_2,"linewidth",1,'LineStyle','--');
     # Vecteurs propres
     plot(x1range,eigenline_1,"linewidth",1);
     plot(x1range,eigenline_2,"linewidth",1);
     legend("field","isocline_1","isocline_2","v_1","v_2","location","south","orientation", "horizontal");
 endfunction
 
+# display portrait de phases
+figure 2
 [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A);
-
-
-
-
-
 
 
 
