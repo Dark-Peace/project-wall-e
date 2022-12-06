@@ -24,7 +24,7 @@ function [t,x] = system_simulation(A, tspan, y0)
     [t,x] = ode23(ode_sys, tspan, y0); # Résolution système
 endfunction
 
-A = A4; # change Ax to plot another equation
+A = A2; # change Ax to plot another equation
 [t,x] = system_simulation(A, tspan, y0);
 figure 1
 plot(t,x)
@@ -41,12 +41,31 @@ function [line_range,isocline_1,isocline_2] = plot_isoclines(A)
     [isocline_1,isocline_2] = compute_isoclines(A,line_range);
 endfunction
 
-[line_range,isocline_1,isocline_2] = plot_isoclines(A);
+# eigenlines
+function [eigenline_1,eigenline_2,V] = compute_eigenlines(A,line_range)
+    [V,L] = eig(A);
+    eigenline_1 = (V(2,1)/V(1,1)) * line_range;
+    eigenline_2 = (V(2,2)/V(1,2)) * line_range;
+endfunction
+
+function [line_range,eigenline_1,eigenline_2] = plot_eigenlines(A)
+    line_range = -1.5:.1:1.5;
+    [eigenline_1,eigenline_2,V] = compute_eigenlines(A,line_range);
+endfunction
+
+##[line_range,isocline_1,isocline_2] = plot_isoclines(A);
+##[line_range,eigenline_1,eigenline_2] = plot_eigenlines(A);
 figure 2
-plot(line_range,isocline_1,"linewidth",1);
-hold on;
-plot(line_range,isocline_2,"linewidth",1);
-legend("isocline_1","isocline_2","location","south");
+##plot(line_range,isocline_1,"linewidth",1);
+##hold on;
+##plot(line_range,isocline_2,"linewidth",1);
+##hold on;
+##plot(line_range,eigenline_1,"linewidth",1);
+##hold on;
+##plot(line_range,eigenline_2,"linewidth",1);
+##hold on;
+#quiver([0;0],[0;0],V(1,:),V(2,:),1.5,"linewidth",1,"color","k");
+#legend("isocline_1","isocline_2","v_1","v_2","location","south");
 
 # 4. Portrait de phase
 function [x1,x2,x1p,x2p] = plot_portrait_phase(A)
@@ -66,7 +85,7 @@ function [x1,x2,x1p,x2p] = plot_portrait_phase(A)
     quiver(x1,x2,x1p./norms,x2p./norms,0.5);
 endfunction
 
-[x1,x2,x1p,x2p] = plot_portrait_phase(A);
+#[x1,x2,x1p,x2p] = plot_portrait_phase(A);
 
 # 4. Portrait de phase complet
 function [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A)
@@ -94,7 +113,7 @@ function [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A)
     # Vecteurs propres
     plot(x1range,eigenline_1,"linewidth",1);
     plot(x1range,eigenline_2,"linewidth",1);
-    legend("field","v_1","v_2","isocline_1","isocline_2","location","south","orientation", "horizontal");
+    legend("field","isocline_1","isocline_2","v_1","v_2","location","south","orientation", "horizontal");
 endfunction
 
 [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A);
