@@ -24,10 +24,6 @@ function [t,x] = system_simulation(A, tspan, y0)
     [t,x] = ode23(ode_sys, tspan, y0); # Résolution système
 endfunction
 
-A = A2; # change Ax to plot another equation
-[t,x] = system_simulation(A, tspan, y0);
-figure 1
-plot(t,x)
 
 
 # Calculer les isoclines
@@ -76,20 +72,62 @@ function [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A)
     # Isoclines
     plot(x1range,isocline_1,"linewidth",1,'LineStyle','--');
     plot(x1range,isocline_2,"linewidth",1,'LineStyle','--');
-    # Vecteurs propres
+    # Vecteurs propres = droites invariantes
     plot(x1range,eigenline_1,"linewidth",1);
     plot(x1range,eigenline_2,"linewidth",1);
     legend("field","isocline_1","isocline_2","v_1","v_2","location","south","orientation", "horizontal");
 endfunction
 
+
+
+A = A1; # change Ax to plot another equation
+[t,x] = system_simulation(A, tspan, y0);
+figure 11
+plot(t,x)
+title("Evolution de w(t) et e(t) pour t \in [0, 10] ")
+xlabel("t")
+ylabel("x")
+legend("w(t)","e(t)","location","south","orientation", "horizontal");
+
 # display portrait de phases
-figure 2
+figure 12
 [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A);
 
+A = A2; # change Ax to plot another equation
+[t,x] = system_simulation(A, tspan, y0);
+figure 21
+plot(t,x)
+title("Evolution de w(t) et e(t) pour t \in [0, 10] ")
+xlabel("t")
+ylabel("x")
+legend("w(t)","e(t)","location","south","orientation", "horizontal");
 
 
+figure 22
+[x1,x2,x1p,x2p] = plot_portrait_phase_complete(A);
+
+A = A3; # change Ax to plot another equation
+[t,x] = system_simulation(A, tspan, y0);
+figure 31
+plot(t,x)
+title("Evolution de w(t) et e(t) pour t \in [0, 10] ")
+xlabel("t")
+ylabel("x")
+legend("w(t)","e(t)","location","south","orientation", "horizontal");
 
 
+figure 32
+[x1,x2,x1p,x2p] = plot_portrait_phase_complete(A);
+
+A = A4; # change Ax to plot another equation
+[t,x] = system_simulation(A, tspan, y0);
+figure 41
+plot(t,x)
+title("Evolution de w(t) et e(t) pour t \in [0, 10] ")
+xlabel("t")
+ylabel("x")
+legend("w(t)","e(t)","location","south","orientation", "horizontal");
 
 
-
+figure 42
+[x1,x2,x1p,x2p] = plot_portrait_phase_complete(A);

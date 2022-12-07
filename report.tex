@@ -10,6 +10,8 @@
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{float}
 \usepackage{listingsutf8}
 \usepackage{hyperref}
@@ -21,6 +23,7 @@
 %------------------------------------------------------
 
 \usepackage{listings}
+\usepackage{adjustbox}
 
 \definecolor{color0}{RGB}{147, 147, 147}
 \definecolor{color1}{RGB}{186, 033, 033}
@@ -116,9 +119,14 @@
 % -----------------------------------------------------
 
 \section{Introduction}
+\newpage
 
 \section{Modélisation}
+\newpage
+
 \section{Analyse de cas}
+\newpage
+
 \subsection{Les sentiments d’EVE ne dépendent pas de WALL-E}
 
 \begin{equation}
@@ -128,6 +136,37 @@
 \dot{e}(t) &= 0 \\
 \end{split}\right.
  \end{equation}
+
+\begin{equation}
+\centering
+A = \left[
+\begin{array}{cc}
+a & b\\
+0 & 0
+\end{array}
+\right]
+ \end{equation}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{pics/11}
+  \caption{A subfigure}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{pics/12}
+  \caption{A subfigure}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{A figure with two subfigures}
+\label{fig:test}
+\end{figure}
+
+
+\newpage
 
 \subsection{Les deux robots ont la même dynamique}
 
@@ -177,16 +216,28 @@ On distingue les différents cas possibles :
 et
 signe(λ1) ̸= signe(λ2). On a
 
-% display graph
-\begin{figure}[h]
+\begin{figure}
 \centering
-\includegraphics[width=0.5\textwidth]{pics/graphs}
-\caption{Selle}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{pics/21}
+  \caption{A subfigure}
+%  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{pics/22}
+  \caption{A subfigure}
+%  \label{fig:sub2}
+\end{subfigure}
+\caption{A figure with two subfigures}
+%\label{fig:test}
 \end{figure}
+
+\newpage
 
 \subsection{Les deux robots auront une dynamique contrastante}
 
-3. Les deux robots auront une dynamique contrastante :
 
 \begin{equation}
 \centering
@@ -196,6 +247,35 @@ signe(λ1) ̸= signe(λ2). On a
 \end{split}\right.
  \end{equation}
 
+\begin{equation}
+\centering
+A = \left[
+\begin{array}{cc}
+a & b\\
+-b & -a
+\end{array}
+\right]
+ \end{equation}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{pics/31}
+  \caption{A subfigure}
+%  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{pics/32}
+  \caption{A subfigure}
+%  \label{fig:sub2}
+\end{subfigure}
+\caption{A figure with two subfigures}
+%\label{fig:test}
+\end{figure}
+
+\newpage
 
 \subsection{La dynamique de chaque robot dépend simplement de l’autre
 robot}
@@ -203,10 +283,40 @@ robot}
 \begin{equation}
 \centering
 \left\{\begin{split}
-\dot{w}(t) &= aw(t) + be(t)\\
-\dot{e}(t) &= −bw(t) − ae(t) \\
+\dot{w}(t) &= aw(t) \\
+\dot{e}(t) &= bw(t) \\
 \end{split}\right.
  \end{equation}
+
+\begin{equation}
+\centering
+A = \left[
+\begin{array}{cc}
+a & 0\\
+b & 0
+\end{array}
+\right]
+ \end{equation}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{pics/41}
+  \caption{A subfigure}
+%  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{pics/42}
+  \caption{A subfigure}
+%  \label{fig:sub2}
+\end{subfigure}
+\caption{A figure with two subfigures}
+%\label{fig:test}
+\end{figure}
+
+\newpage
 
 \subsection{Bonus : a n’est pas une constante mais dépend du temps}
 
@@ -220,9 +330,27 @@ On pose a(t) = max(0, 100 − 0.1t).
 \end{split}\right.
  \end{equation}
 
+\section{typologie des systèmes}
+pour a = -0.15 et b = 0.9
+1 noeud instable dégénéré
+2 selle
+3 centre
+4 noeud instable dégénéré
 
+pour a et b = 0.1
+1 noeud instable dégénéré
+2 ligne équilibre instable
+3 noeud stable dégénéré
+4 noeud instable dégénéré
 
+pour a et b = -0.1
+1 noeud stable dégénéré
+2 ligne équilibre stable
+3 noeud instable dégénéré
+4 noeud stable dégénéré
+
+\newpage
 \section{Conclusion}
-Nous
+Nous pouvons conclure des 5 études de cas que les deux robots ont
 
 \end{document}
