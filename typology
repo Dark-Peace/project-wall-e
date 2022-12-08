@@ -5,22 +5,22 @@ x // y veut dire que j'avais mis x la 1e fois mais que maintenant je dirais que 
 "" indique le nom anglais parce que j'ai plus retrouvé le diagramme de Poincaré en français
 
 pour a = -0.15 et b = 0.9
-1 noeud instable dégénéré // "degenerate sink" : valeurs propres = [1	0.98639 0	0.1644]
-2 selle // "sink" : [0.70711	0.70711 -0.70711	0.70711]
-v 3 centre : [0.70711+0i	0.70711-0i 0.11785+0.69722i	0.11785-0.69722i]
-4 "degenerate sink" : [0	0.1644 1	-0.98639]
+1 noeud instable dégénéré // "degenerate sink" : valeurs propres = [1 0.98639 0 0.1644]
+2 selle // "sink" : [0.70711 0.70711 -0.70711 0.70711]
+v 3 centre : [0.70711+0i 0.70711-0i 0.11785+0.69722i 0.11785-0.69722i]
+4 "degenerate sink" : [0 0.1644 1 -0.98639]
 
 pour a et b = 0.1
-1 "degenerate source" : [1	-0.70711 0	0.70711]
-v 2 ligne équilibre instable : [-0.70711	0.70711 0.70711	0.70711]
-3 noeud stable dégénéré // "degenerate source" // ??? : [0.70711+0i	0.70711-0i -0.70711+1.2413e-16i	-0.70711-1.2413e-16i]
-4 "degenerate source" : [0	0.70711 1	0.70711]
+1 "degenerate source" : [1 -0.70711 0 0.70711]
+v 2 ligne équilibre instable : [-0.70711 0.70711 0.70711 0.70711]
+3 noeud stable dégénéré // "degenerate source" // ??? : [0.70711+0i 0.70711-0i -0.70711+1.2413e-16i -0.70711-1.2413e-16i]
+4 "degenerate source" : [0 0.70711 1 0.70711]
 
 pour a et b = -0.1
-1 "degenerate sink" : [1	-0.70711 0	0.70711]
-v 2 ligne équilibre stable : [0.70711	-0.70711 0.70711	0.70711]
-3 "degenerate sink" : [0.70711-1.2413e-16i	0.70711+1.2413e-16i -0.70711+0i	-0.70711-0i]
-4 "degenerate sink" : [0	0.70711 1	0.70711]
+1 "degenerate sink" : [1 -0.70711 0 0.70711]
+v 2 ligne équilibre stable : [0.70711 -0.70711 0.70711 0.70711]
+3 "degenerate sink" : [0.70711-1.2413e-16i 0.70711+1.2413e-16i -0.70711+0i -0.70711-0i]
+4 "degenerate sink" : [0 0.70711 1 0.70711]
 
 
 j'ai du mal à différencier noeud instable dégénéré de stable dégénéré alors je suis pas sûr...
