@@ -6,9 +6,15 @@ x // y veut dire que j'avais mis x la 1e fois mais que maintenant je dirais que 
 
 pour a = -0.15 et b = 0.9
 1 noeud instable dégénéré // "degenerate sink" : valeurs propres = [1 0.98639 0 0.1644]
-2 selle // "sink" : [0.70711 0.70711 -0.70711 0.70711]
+v 2 selle : [0.70711 0.70711 -0.70711 0.70711]
 v 3 centre : [0.70711+0i 0.70711-0i 0.11785+0.69722i 0.11785-0.69722i]
 4 "degenerate sink" : [0 0.1644 1 -0.98639]
+
+pour a = 0.15 et b = -0.9
+1 noeud instable dégénéré // "degenerate source" : valeurs propres = [1 0.98639 0 0.1644]
+v 2 selle : [-0.70711 -0.70711 -0.70711 0.70711]
+v 3 centre : [-0.70711+0i -0.70711-0i -0.11785+0.69722i -0.11785-0.69722i]
+4 "degenerate source" : [0 0.1644 1 -0.98639]
 
 pour a et b = 0.1
 1 "degenerate source" : [1 -0.70711 0 0.70711]
