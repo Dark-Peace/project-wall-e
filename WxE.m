@@ -31,7 +31,7 @@ function [line_range,eigenline_1,eigenline_2] = plot_eigenlines(A)
 endfunction
 
 # 4. Portrait de phase complet
-function [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A)
+function [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A,a,b)
     #grid for plotting
     x1range=-1.5:.1:1.5;
     x2range=-1.5:.1:1.5;
@@ -56,6 +56,8 @@ function [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A)
     # Vecteurs propres = droites invariantes
     plot(x1range,eigenline_1,"linewidth",1);
     plot(x1range,eigenline_2,"linewidth",1);
+    titl = ["Phase portrait for a=",num2str(a)," b=",num2str(b)];
+    title(titl)
     legend("field","isocline_1","isocline_2","v_1","v_2","location","south","orientation", "horizontal");
 endfunction
 
@@ -63,7 +65,7 @@ function system_simulation_plot(A,tspan,y0,figure_number,a,b)
     [t,x] = system_simulation(A,tspan,y0);
     figure(figure_number);
     plot(t,x)
-    titl = ["Evolution de w(t) et e(t) pour t \in [0, 10] a=",num2str(a)," b=",num2str(b)];
+    titl = ["Evolution of w(t) and e(t) for t \in [0, 10], a=",num2str(a),", b=",num2str(b)];
     title(titl)
     xlabel("t")
     ylabel("x")
@@ -76,15 +78,17 @@ function system_simulation_and_portrait_phase_and_plot(tspan)
     disp('system_simulation_and_portrait_phase_and_plot()')
     figure_number = 11
     initial_conditions_list = {[1,1]
-                              ,[-1,1]
-                              ,[-2,2]}
+                              %,[-1,1]
+                              %,[-2,2]
+                              }
     listOfTuples = {[-0.15,0.9]
-                    ,[-0.15,-0.9]
-                    ,[0.15,0.9]
-                    ,[0.15,-0.9]
-                    ,[1,0.1]
-                    ,[0.1,0.1]
-                    ,[-0.1,-0.1]}
+                    %,[-0.15,-0.9]
+                    %,[0.15,0.9]
+                    %,[0.15,-0.9]
+                    %,[1,0.1]
+                    %,[0.1,0.1]
+                    %,[-0.1,-0.1]
+                    }
 
     fprintf('listOfTuples length : %d .\n',length(listOfTuples));
     fprintf('initial_conditions_list length : %d .\n',length(initial_conditions_list));
@@ -133,7 +137,7 @@ function system_simulation_and_portrait_phase_and_plot(tspan)
                 # display portrait de phases
                 %figure figure_number;
                 figure(figure_number);
-                [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A);
+                [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A,a,b);
                 figure_number = figure_number + 1;
             endfor
         endfor
