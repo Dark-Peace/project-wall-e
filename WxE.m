@@ -90,8 +90,8 @@ function system_simulation_and_portrait_phase_and_plot(tspan)
     listOfTuples = {
                      [-0.15,0.9]
                     %,[-0.15,-0.9]
-                    ,[0.15,0.9]
-                    %,[0.15,-0.9]
+                    %,[0.15,0.9] % a < b et -b < a
+                    ,[0.15,-0.9] % b < a et a < -b
                     %,[1,0.1]
                     %,[0.1,0.1]
                     %,[-0.1,-0.1]
