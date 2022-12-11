@@ -1,54 +1,11 @@
 
-%y0 = [-1,1];
-y0 = [-2,2];
-%y0 = [-1,1];
-%y0 = [-1,1];
-%y0 = [0,2]; %41 bad
 tspan = [0,10];
-a = -0.15;
-b = 0.9;
-
-# coefficient matrix
-#1
-A1 = [a b;
-      0 0];
-#2
-A2 = [a b;
-      b a];
-#3
-A3 = [a b;
-      -b -a];
-#4
-A4 = [a 0;
-      b 0];
-
-%coefficient_matrices = [A1,A2,A3,A4];
-coefficient_matrices = {A1,A2,A3,A4};
-
-%disp('coefficient_matrices size');
-%disp('coefficient_matrices size'+numel(coefficient_matrices));
-fprintf('coefficient_matrices numel : %d .\n',numel(coefficient_matrices));
-fprintf('coefficient_matrices length : %d .\n',length(coefficient_matrices));
-
-%for a = 1:numel(coefficient_matrices) % numel(coefficient_matrices) = 16
-for a = 1:length(coefficient_matrices)
-    fprintf('matrix : %d \n',a);
-
-    %A = coefficient_matrices{a};  %error: matrix cannot be indexed with {
-    A = coefficient_matrices{a};
-
-    %A = a;
-    disp(A);
-
-endfor
 
 # love equation function
 function [t,x] = system_simulation(A, tspan, y0)
     ode_sys = @(t,x) [A(1,1)*x(1)+A(1,2)*x(2);A(2,1)*x(1)+A(2,2)*x(2)]; # Definition system
     [t,x] = ode23(ode_sys, tspan, y0); # Resolution system
 endfunction
-
-
 
 # Calculer les isoclines
 function [isocline_1,isocline_2] = compute_isoclines(A,line_range)
@@ -113,63 +70,77 @@ function system_simulation_plot(A,tspan,y0,figure_number,a,b)
     legend("w(t)","e(t)","location","south","orientation", "horizontal");
 endfunction
 
-function system_simulation_and_portrait_phase_and_plot(tspan,coefficient_matrices,y0)
+%function system_simulation_and_portrait_phase_and_plot(tspan,coefficient_matrices,y0)
+%function system_simulation_and_portrait_phase_and_plot(tspan,y0)
+function system_simulation_and_portrait_phase_and_plot(tspan)
     disp('system_simulation_and_portrait_phase_and_plot()')
     figure_number = 11
-    listOfTuples = [[-0.15,0.9]
-    ,[-0.15,-0.9]
-    ,[0.15,0.9]
-    ,[0.15,-0.9]
-    ,[1,0.1]
-    ,[0.1,0.1]
-    ,[-0.1,-0.1]]
+    initial_conditions_list = {[1,1]
+                              ,[-1,1]
+                              ,[-2,2]}
+    listOfTuples = {[-0.15,0.9]
+                    ,[-0.15,-0.9]
+                    ,[0.15,0.9]
+                    ,[0.15,-0.9]
+                    ,[1,0.1]
+                    ,[0.1,0.1]
+                    ,[-0.1,-0.1]}
 
-     listOfTuples = {[-0.15,0.9]
-    ,[-0.15,-0.9]
-    ,[0.15,0.9]
-    ,[0.15,-0.9]
-    ,[1,0.1]
-    ,[0.1,0.1]
-    ,[-0.1,-0.1]}
-    %fprintf('listOfTuples size : %d .\n',numel(listOfTuples));
-    %fprintf('listOfTuples size/2 : %d .\n',numel(listOfTuples)/2);
     fprintf('listOfTuples length : %d .\n',length(listOfTuples));
+    fprintf('initial_conditions_list length : %d .\n',length(initial_conditions_list));
 
-    %for a = 1:numel(coefficient_matrices)/4
-    for a = 1:length(coefficient_matrices)
-        fprintf('coefficient_matrices length : %d .\n',length(coefficient_matrices));
-
-        A = coefficient_matrices{a};
-        %A = coefficient_matrices(a);
-        disp(A)
-
-        %for i = 1:numel(listOfTuples)/2 # from OpenAI GPT chat
+    for coefficient_matrix_index = 1:4
         for i = 1:length(listOfTuples)
-            % Get the current tuple
-            currentTuple = listOfTuples{i};
-            %currentTuple = listOfTuples(i);
+            for ic = 1:length(initial_conditions_list)
+                % Get the current initial_conditions
+                fprintf('initial_conditions : %d .\n',initial_conditions_list{ic});
 
-            % Extract the values from the tuple into two variables
-            a = currentTuple(1);
-            b = currentTuple(2);
-            %a = currentTuple{1};
-            %b = currentTuple{2};
+                y0 = initial_conditions_list{ic};
+                %y0 = initial_conditions_list(ic);
+                % Get the current a & b
+                currentTuple = listOfTuples{i};
+                %currentTuple = listOfTuples(i);
 
-            % print the values
-            fprintf('a : %d .\n', a);
-            fprintf('b : %d .\n', b);
+                % Extract the values from the tuple into two variables
+                a = currentTuple(1);
+                b = currentTuple(2);
 
-            system_simulation_plot(A,tspan,y0,figure_number,a,b);
-            figure_number = figure_number + 1;
-            # display portrait de phases
-            %figure figure_number;
-            figure(figure_number);
-            [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A);
-            figure_number = figure_number + 1;
+                % print the values
+                %fprintf('a : %d .\n', a);
+                %fprintf('b : %d .\n', b);
 
+                if coefficient_matrix_index == 1
+                    #1
+                    A = [a b;
+                          0 0];
+                elseif coefficient_matrix_index == 2
+                    #2
+                    A = [a b;
+                          b a];
+                elseif coefficient_matrix_index == 3
+                    #3
+                    A = [a b;
+                          -b -a];
+                elseif coefficient_matrix_index == 4
+                    #4
+                    A = [a 0;
+                          b 0];
+                end
+                disp(A)
+
+                system_simulation_plot(A,tspan,y0,figure_number,a,b);
+                figure_number = figure_number + 1;
+                # display portrait de phases
+                %figure figure_number;
+                figure(figure_number);
+                [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A);
+                figure_number = figure_number + 1;
+            endfor
         endfor
     endfor
 endfunction
 
 
-system_simulation_and_portrait_phase_and_plot(tspan,coefficient_matrices,y0)
+%system_simulation_and_portrait_phase_and_plot(tspan,coefficient_matrices,y0)
+%system_simulation_and_portrait_phase_and_plot(tspan,y0)
+system_simulation_and_portrait_phase_and_plot(tspan)
