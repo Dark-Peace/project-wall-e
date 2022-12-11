@@ -56,7 +56,11 @@ function [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A,a,b)
     # Vecteurs propres = droites invariantes
     plot(x1range,eigenline_1,"linewidth",1);
     plot(x1range,eigenline_2,"linewidth",1);
-    titl = ["Phase portrait for a=",num2str(a)," b=",num2str(b)];
+    titl = ["Phase portrait for a=",num2str(a),", b=",num2str(b)
+    ,", A(1,1)=",num2str(A(1,1))
+    ,", A(1,2)=",num2str(A(1,2))
+    ,", A(2,1)=",num2str(A(2,1))
+    ,", A(2,2)=",num2str(A(2,2))];
     title(titl)
     legend("field","isocline_1","isocline_2","v_1","v_2","location","south","orientation", "horizontal");
 endfunction
@@ -65,15 +69,17 @@ function system_simulation_plot(A,tspan,y0,figure_number,a,b)
     [t,x] = system_simulation(A,tspan,y0);
     figure(figure_number);
     plot(t,x)
-    titl = ["Evolution of w(t) and e(t) for t \in [0, 10], a=",num2str(a),", b=",num2str(b)];
+    titl = ["Evolution of w(t) and e(t) for t \in [0, 10], a=",num2str(a),", b=",num2str(b)
+    ,", A(1,1)=",num2str(A(1,1))
+    ,", A(1,2)=",num2str(A(1,2))
+    ,", A(2,1)=",num2str(A(2,1))
+    ,", A(2,2)=",num2str(A(2,2))];
     title(titl)
     xlabel("t")
     ylabel("x")
     legend("w(t)","e(t)","location","south","orientation", "horizontal");
 endfunction
 
-%function system_simulation_and_portrait_phase_and_plot(tspan,coefficient_matrices,y0)
-%function system_simulation_and_portrait_phase_and_plot(tspan,y0)
 function system_simulation_and_portrait_phase_and_plot(tspan)
     disp('system_simulation_and_portrait_phase_and_plot()')
     figure_number = 11
@@ -81,9 +87,10 @@ function system_simulation_and_portrait_phase_and_plot(tspan)
                               %,[-1,1]
                               %,[-2,2]
                               }
-    listOfTuples = {[-0.15,0.9]
+    listOfTuples = {
+                     [-0.15,0.9]
                     %,[-0.15,-0.9]
-                    %,[0.15,0.9]
+                    ,[0.15,0.9]
                     %,[0.15,-0.9]
                     %,[1,0.1]
                     %,[0.1,0.1]
@@ -98,9 +105,7 @@ function system_simulation_and_portrait_phase_and_plot(tspan)
             for ic = 1:length(initial_conditions_list)
                 % Get the current initial_conditions
                 fprintf('initial_conditions : %d .\n',initial_conditions_list{ic});
-
                 y0 = initial_conditions_list{ic};
-                %y0 = initial_conditions_list(ic);
                 % Get the current a & b
                 currentTuple = listOfTuples{i};
                 %currentTuple = listOfTuples(i);
@@ -117,20 +122,40 @@ function system_simulation_and_portrait_phase_and_plot(tspan)
                     #1
                     A = [a b;
                           0 0];
+                    Aa = a;
+                    Ab = b;
+                    Ac = 0;
+                    Ad = 0;
+
                 elseif coefficient_matrix_index == 2
                     #2
                     A = [a b;
                           b a];
+                           Aa = a;
+                    Ab = b;
+                    Ac = b;
+                    Ad = a;
                 elseif coefficient_matrix_index == 3
                     #3
                     A = [a b;
                           -b -a];
+                          Aa = a;
+                    Ab = b;
+                    Ac = -b;
+                    Ad = -a;
+
                 elseif coefficient_matrix_index == 4
                     #4
                     A = [a 0;
                           b 0];
+                               Aa = a;
+                    Ab = 0;
+                    Ac = b;
+                    Ad = 0;
                 end
                 disp(A)
+                Astr = [ ' \it{A} = ', '$$ \left[ {\matrix{ ',num2str(A(1,1)),' & ',  num2str(A(1,2)),...
+    ' \cr ', num2str(A(2,1)) , ' &  ',  num2str(A(2,2)),' } }  \right] $$' ];
 
                 system_simulation_plot(A,tspan,y0,figure_number,a,b);
                 figure_number = figure_number + 1;
