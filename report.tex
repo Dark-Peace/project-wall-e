@@ -107,7 +107,7 @@
 \title{INFO-F-305 - Modélisation et Simulation
 \\Projet Octave
 \\Wall-e}
-\author{Becker Robin Gilles - Bourgeois Noé}
+\author{Becker Robin-Gilles - Bourgeois Noé}
 \date{December 2022}
 
 \begin{document}
@@ -119,13 +119,16 @@
 % -----------------------------------------------------
 
 \section{Introduction}
-\newpage
+Ce projet consiste à modéliser une relation amoureuse utilisant les systèmes dynamiques. Nous allons modéliser l'évolution de leurs sentiments ainsi qu'étudier les types de portraits de phase des différents systèmes d'après leurs valeurs a et b.
 
-\section{Modélisation}
-\newpage
+\section{Systèmes}
 
-\section{Analyse de cas}
-\newpage
+Pour modéliser l'évolution des sentiments de Wall-E, en bleu, et d'Eve, en orange, nous avons fixé a et b respectivement à -0.15 et 0.9.
+\\
+Pour dessiner les portraits de phase, nous avons fixé les conditions initiales à -1 et 1.
+\\
+Tout a été réalisé sur un intervalle de temps de 0 à 10.
+
 
 \subsection{Les sentiments d’EVE ne dépendent pas de WALL-E}
 
@@ -147,39 +150,72 @@ a & b\\
 \right]
  \end{equation}
 
-\begin{figure}
+
+\begin{figure}[!htb]
+\centering
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E1-1_1.jpg}
+  \caption{y0 = [-1,1]}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E11_1.jpg}
+  \caption{y0 = [1,1]}
+  \label{fig:sub2}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E11_10.jpg}
+  \caption{y0 = [1,10]}
+%  \label{fig:sub1}
+  \end{subfigure}%
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E10_0.jpg}
+  \caption{y0 = [0,0]}
+%  \label{fig:sub2}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E110_-10.jpg}
+  \caption{y0 = [10,-10]}
+%  \label{fig:sub2}
+  \end{subfigure}
+\caption{Evolutions du système 1 pour les conditions initiales y0}
+%\label{fig:test}
+\end{figure}
+
+\subsubsection{Typologie}
+
+Si a $<$ 0, cela donne un noeud stable dégénéré. Ici, a = -0.15 et b = 0.9.
+\\
+Si a $>$ 0, cela donne un noeud instable dégénéré. Ici, a = -0.15 et b = 0.9.
+\\
+Si a = 0, cela donne un noeud singulier. Ici a = 0 et b = 1.
+
+\begin{figure}[!htb]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/11}
-  \caption{A subfigure}
+  \includegraphics[width=\linewidth]{Phases/P1-015_09.jpg}
+  \caption{a = -0.15 et b = 0.9}
   \label{fig:sub1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/12}
-  \caption{A subfigure}
+  \includegraphics[width=\linewidth]{Phases/P1015_-09.jpg}
+  \caption{a = 0.15 et b = -0.9}
   \label{fig:sub2}
-\end{subfigure}
-\caption{A figure with two subfigures}
-\label{fig:test}
-\end{figure}
-
-\begin{figure}
-\centering
+  \end{subfigure}
   \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/11_-2_2}
-  \caption{A subfigure}
+  \includegraphics[width=\linewidth]{Phases/P10_1.jpg}
+  \caption{a = 0 et b = 1}
 %  \label{fig:sub1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=\linewidth]{pics/11_-2_2}
-  \caption{A subfigure}
-%  \label{fig:sub2}
-\end{subfigure}
-\caption{A figure with two subfigures}
+  \end{subfigure}%
+\caption{Portraits de phase du système 1}
 %\label{fig:test}
 \end{figure}
 
@@ -224,66 +260,97 @@ On résoud et on obtient les valeurs propres :
 
 \begin{equation}
 \centering
-\lambda_{1,2} = 2a \pm \sqrt{4b^2} = {a - b, a + b}
+\lambda_1,2 = 2a \pm \sqrt{4b^2} = {a - b, a + b}
  \end{equation}
 
 On distingue les différents cas possibles :
 1. Selle : pour que le système soit une selle, il faut
-
-\begin{equation}
-\centering
-\lambda_{1,2} \neq 0
- \end{equation}
-
+λ1,2 ̸= 0
 et
-\begin{equation}
+signe(λ1) ̸= signe(λ2). On a
+
+
+\begin{figure}[!htb]
 \centering
-signe \lambda_{1} \neq signe \lambda_{2}
- \end{equation}
-
-On a donc
-a < b
-et -b < a
-ou
-b < a
-et a < -b
-
-
-\begin{figure}
-\centering
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.3\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/18}
-  \caption{a < b
-et -b < a}
-%  \label{fig:sub1}
+  \includegraphics[width=\linewidth]{évol/E2-1_1.jpg}
+  \caption{y0 = [-1,1]}
+  \label{fig:sub1}
 \end{subfigure}%
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.3\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/18-2}
-  \caption{b < a
-et a < -b }
+  \includegraphics[width=\linewidth]{évol/E21_1.jpg}
+  \caption{y0 = [1,1]}
+  \label{fig:sub2}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E21_10.jpg}
+  \caption{y0 = [1,10]}
+%  \label{fig:sub1}
+  \end{subfigure}%
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E2-2_-2.jpg}
+  \caption{y0 = [-2,-2]}
 %  \label{fig:sub2}
-\end{subfigure}
-\caption{A figure with two subfigures}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E20_0.jpg}
+  \caption{y0 = [0,0]}
+%  \label{fig:sub2}
+  \end{subfigure}
+\caption{Evolutions du système 2 pour les conditions initiales y0}
 %\label{fig:test}
 \end{figure}
 
-\begin{figure}
+\subsubsection{Typologie}
+
+Si a $< -|b|$ , cela donne un noeud stable. Ici, 0.15 $<$ -(-0.9)
+\\
+Si a $ > -|b|$, cela donne un noeud instable. Ici, a = 1 et b = 0.1.
+\\
+Si -b $<$ a $<$ b, cela donne une selle. Ici, -(0.9) $<$ -0.15 $<$ 0.9
+\\
+Si a = b $<$ 0, cela donne une ligne de points d’équilibre stable. Ici, a et b = -0.1.
+\\
+Si a = b $>$ 0, cela donne une ligne de points d’équilibre instable. Ici, a et b = 0.1.
+
+\begin{figure}[!htb]
 \centering
-  \begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/21_-2_2}
-  \caption{A subfigure}
-%  \label{fig:sub1}
+  \includegraphics[width=\linewidth]{Phases/P2015_-09.jpg}
+  \caption{a = 0.15 et b = -0.9}
+  \label{fig:sub1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/21_-2_2}
-  \caption{A subfigure}
-%  \label{fig:sub2}
-\end{subfigure}
-\caption{A figure with two subfigures}
+  \includegraphics[width=\linewidth]{Phases/P2-015_09.jpg}
+  \caption{a = -0.15 et b = 0.9}
+  \label{fig:sub2}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{Phases/P21_01.jpg}
+  \caption{a = 1 et b = 0.1}
+  \label{fig:sub2}
+  \end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{Phases/P2-01_-01.jpg}
+  \caption{a = -0.1 et b = -0.1}
+  \label{fig:sub2}
+  \end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{Phases/P201_01.jpg}
+  \caption{a = 0.1 et b = 0.1}
+  \label{fig:sub2}
+  \end{subfigure}
+\caption{Portraits de phase du système 2}
 %\label{fig:test}
 \end{figure}
 
@@ -296,7 +363,7 @@ et a < -b }
 \centering
 \left\{\begin{split}
 \dot{w}(t) &= aw(t) + be(t)\\
-\dot{e}(t) &= −bw(t) − ae(t) \\
+\dot{e}(t) &= - bw(t) - ae(t) \\
 \end{split}\right.
  \end{equation}
 
@@ -310,41 +377,75 @@ a & b\\
 \right]
  \end{equation}
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.3\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/31}
-  \caption{A subfigure}
-%  \label{fig:sub1}
+  \includegraphics[width=\linewidth]{évol/E3-1_1.jpg}
+  \caption{y0 = [-1,1]}
+  \label{fig:sub1}
 \end{subfigure}%
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.3\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/32}
-  \caption{A subfigure}
+  \includegraphics[width=\linewidth]{évol/E31_1.jpg}
+  \caption{y0 = [1,1]}
+  \label{fig:sub2}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E31_10.jpg}
+  \caption{y0 = [1,10]}
+%  \label{fig:sub1}
+  \end{subfigure}%
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E3-10_-15.jpg}
+  \caption{y0 = [-10,-15]}
 %  \label{fig:sub2}
-\end{subfigure}
-\caption{A figure with two subfigures}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E20_0.jpg}
+  \caption{y0 = [0,0]}
+%  \label{fig:sub2}
+  \end{subfigure}
+\caption{Evolutions du système 3 pour les conditions initiales y0}
 %\label{fig:test}
 \end{figure}
 
-\begin{figure}
+\subsubsection{Typologie}
+
+Si $(a^2-b^2) < 0$, cela donne un centre. Ici, $(-0.15^2-0.9^2) = -0.7875$
+\\
+Si $(a^2-b^2) > 0$, cela donne une selle. Ici, $(-1^2-0.1^2) = 0.99$
+\\
+Si a = b, cela donne un noeud singulier. Ici, a = 0.1 et b = 0.1.
+\\
+
+\begin{figure}[!htb]
 \centering
-  \begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.4\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/31_-2_2}
-  \caption{A subfigure}
-%  \label{fig:sub1}
+  \includegraphics[width=\linewidth]{Phases/P3-015_09.jpg}
+  \caption{a = -0.15 et b = 0.9}
+  \label{fig:sub1}
 \end{subfigure}%
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.4\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/31_-2_2}
-  \caption{A subfigure}
-%  \label{fig:sub2}
-\end{subfigure}
-\caption{A figure with two subfigures}
+  \includegraphics[width=\linewidth]{Phases/P31_01.jpg}
+  \caption{a = 1 et b = 0.1}
+  \label{fig:sub2}
+  \end{subfigure}
+\begin{subfigure}{.4\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{Phases/P301_01.jpg}
+  \caption{a = 0.1 et b = 0.1}
+  \label{fig:sub2}
+  \end{subfigure}
+\caption{Portraits de phase du système 3}
 %\label{fig:test}
 \end{figure}
+
 
 \newpage
 
@@ -369,39 +470,66 @@ b & 0
 \right]
  \end{equation}
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.3\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/41}
-  \caption{A subfigure}
-%  \label{fig:sub1}
+  \includegraphics[width=\linewidth]{évol/E4-1_1.jpg}
+  \caption{y0 = [-1,1]}
+  \label{fig:sub1}
 \end{subfigure}%
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.3\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/42}
-  \caption{A subfigure}
+  \includegraphics[width=\linewidth]{évol/E41_1.jpg}
+  \caption{y0 = [1,1]}
+  \label{fig:sub2}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E41_10.jpg}
+  \caption{y0 = [1,10]}
+%  \label{fig:sub1}
+  \end{subfigure}%
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E4-2_-3.jpg}
+  \caption{y0 = [-2,-3]}
 %  \label{fig:sub2}
-\end{subfigure}
-%\caption{A figure with two subfigures}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{évol/E20_0.jpg}
+  \caption{y0 = [0,0]}
+%  \label{fig:sub2}
+  \end{subfigure}
+\caption{Evolutions du système 4 pour les conditions initiales y0}
 %\label{fig:test}
 \end{figure}
 
-\begin{figure}
+\subsubsection{Typologie}
+
+Si a $<$ 0, cela donne un noeud stable dégénéré. Ici, a = -0.15 et b = 0.9.
+\\
+Si a $>$ 0, cela donne un noeud instable dégénéré. Ici, a = -0.15 et b = 0.9.
+\\
+xxx Si a = 0, cela donne un noeud singulier. Ici a = 0 et b = 1.
+
+
+\begin{figure}[!htb]
 \centering
-  \begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/41_-2_2}
-  \caption{A subfigure}
-%  \label{fig:sub1}
+  \includegraphics[width=\linewidth]{Phases/P4-015_09.jpg}
+  \caption{a = -0.15 et b = 0.9}
+  \label{fig:sub1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{pics/41_-2_2}
-  \caption{A subfigure}
-%  \label{fig:sub2}
-\end{subfigure}
-\caption{A figure with two subfigures}
+  \includegraphics[width=\linewidth]{Phases/P4015_-09.jpg}
+  \caption{a = 1 et b = 0.1}
+  \label{fig:sub2}
+  \end{subfigure}
+\caption{Portraits de phase du système 4}
 %\label{fig:test}
 \end{figure}
 
@@ -418,28 +546,5 @@ On pose a(t) = max(0, 100 − 0.1t).
 \dot{e}(t) &= bw(t) + a(t)e(t) \\
 \end{split}\right.
  \end{equation}
-
-\section{typologie des systèmes}
-pour a = -0.15 et b = 0.9
-1 noeud instable dégénéré
-2 selle
-3 centre
-4 noeud instable dégénéré
-
-pour a et b = 0.1
-1 noeud instable dégénéré
-2 ligne équilibre instable
-3 noeud stable dégénéré
-4 noeud instable dégénéré
-
-pour a et b = -0.1
-1 noeud stable dégénéré
-2 ligne équilibre stable
-3 noeud instable dégénéré
-4 noeud stable dégénéré
-
-\newpage
-\section{Conclusion}
-Nous pouvons conclure des 5 études de cas que les deux robots ont
 
 \end{document}
