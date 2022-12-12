@@ -83,93 +83,106 @@ endfunction
 function system_simulation_and_portrait_phase_and_plot(tspan)
     disp('system_simulation_and_portrait_phase_and_plot()')
     figure_number = 11
-    initial_conditions_list = {[1,1]
-                              %,[-1,1]
-                              %,[-2,2]
+    % posing initial_condition(s) (5 for the commission)
+    % (UN)COMMENT HERE FOR PARTICULAR SEARCH
+    initial_conditions_list = {
+                               %[0,0]
+                              ,%[1,1]
+                              ,[-1,1]
+                              ,[-2,2]
+                              %,[-2,-3]
+                              %,[1,10]
+                              ,[-10,-15]
+                              %,[10,-10]
                               }
+    % posing a & b (in function of system)
+    % (UN)COMMENT HERE FOR PARTICULAR SEARCH
     listOfTuples = {
                      [-0.15,0.9]
                     %,[-0.15,-0.9]
-                    %,[0.15,0.9] % a < b et -b < a
-                    ,[0.15,-0.9] % b < a et a < -b
+                    ,[0.15,0.9] % a < b et -b < a
+                    %,[0.15,-0.9] % b < a et a < -b
                     %,[1,0.1]
                     %,[0.1,0.1]
                     %,[-0.1,-0.1]
                     }
 
-    fprintf('listOfTuples length : %d .\n',length(listOfTuples));
-    fprintf('initial_conditions_list length : %d .\n',length(initial_conditions_list));
+    %fprintf('listOfTuples length : %d .\n',length(listOfTuples));
+    %fprintf('initial_conditions_list length : %d .\n',length(initial_conditions_list));
 
-    for coefficient_matrix_index = 1:4
-        for i = 1:length(listOfTuples)
+
+
+    for i = 1:length(listOfTuples)
+        % Get the current a & b
+        currentTuple = listOfTuples{i};
+
+        % Extract the values from the tuple into two variables
+        a = currentTuple(1);
+        b = currentTuple(2);
+
+        % print the values
+        %fprintf('a : %d .\n', a);
+        %fprintf('b : %d .\n', b);
+
+
+        for coefficient_matrix_index = 1:4
+            if coefficient_matrix_index == 1
+                #1
+                A = [a b;
+                      0 0];
+                %Aa = a;
+                %Ab = b;
+                %Ac = 0;
+                %Ad = 0;
+
+            elseif coefficient_matrix_index == 2
+                #2
+                A = [a b;
+                      b a];
+                %Aa = a;
+                %Ab = b;
+                %Ac = b;
+                %Ad = a;
+            elseif coefficient_matrix_index == 3
+                #3
+                A = [a b;
+                      -b -a];
+                %Aa = a;
+                %Ab = b;
+                %Ac = -b;
+                %Ad = -a;
+
+            elseif coefficient_matrix_index == 4
+                #4
+                A = [a 0;
+                      b 0];
+                %Aa = a;
+                %Ab = 0;
+                %Ac = b;
+                %Ad = 0;
+            end
+            disp(A)
+
+
+            # display phase portrait
+            figure(figure_number);
+            [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A,a,b);
+            pause(2); % wait 2 seconds
+
+            figure_number = figure_number + 1;
+
             for ic = 1:length(initial_conditions_list)
                 % Get the current initial_conditions
                 fprintf('initial_conditions : %d .\n',initial_conditions_list{ic});
                 y0 = initial_conditions_list{ic};
-                % Get the current a & b
-                currentTuple = listOfTuples{i};
-                %currentTuple = listOfTuples(i);
-
-                % Extract the values from the tuple into two variables
-                a = currentTuple(1);
-                b = currentTuple(2);
-
-                % print the values
-                %fprintf('a : %d .\n', a);
-                %fprintf('b : %d .\n', b);
-
-                if coefficient_matrix_index == 1
-                    #1
-                    A = [a b;
-                          0 0];
-                    Aa = a;
-                    Ab = b;
-                    Ac = 0;
-                    Ad = 0;
-
-                elseif coefficient_matrix_index == 2
-                    #2
-                    A = [a b;
-                          b a];
-                           Aa = a;
-                    Ab = b;
-                    Ac = b;
-                    Ad = a;
-                elseif coefficient_matrix_index == 3
-                    #3
-                    A = [a b;
-                          -b -a];
-                          Aa = a;
-                    Ab = b;
-                    Ac = -b;
-                    Ad = -a;
-
-                elseif coefficient_matrix_index == 4
-                    #4
-                    A = [a 0;
-                          b 0];
-                               Aa = a;
-                    Ab = 0;
-                    Ac = b;
-                    Ad = 0;
-                end
-                disp(A)
-                Astr = [ ' \it{A} = ', '$$ \left[ {\matrix{ ',num2str(A(1,1)),' & ',  num2str(A(1,2)),...
-    ' \cr ', num2str(A(2,1)) , ' &  ',  num2str(A(2,2)),' } }  \right] $$' ];
 
                 system_simulation_plot(A,tspan,y0,figure_number,a,b);
                 figure_number = figure_number + 1;
-                # display portrait de phases
-                %figure figure_number;
-                figure(figure_number);
-                [x1,x2,x1p,x2p] = plot_portrait_phase_complete(A,a,b);
-                figure_number = figure_number + 1;
+
+                pause(2); % wait 2 seconds
             endfor
         endfor
     endfor
 endfunction
 
-
-%system_simulation_and_portrait_phase_and_plot(tspan,coefficient_matrices,y0)
-%system_simulation_and_portrait_phase_and_plot(tspan,y0)
 system_simulation_and_portrait_phase_and_plot(tspan)
